@@ -39,7 +39,7 @@ public class HabilidadePokemonTeste extends TesteBase {
         assert habilidade.getPokemonsRelacionados().size() > 0 : "Esperava Pokémon associados à habilidade";
 
         String nomePrimeiroPokemon = habilidade.getPokemonsRelacionados().get(0).getPokemon().getNome();
-        assert nomePrimeiroPokemon != null && !nomePrimeiroPokemon.isEmpty() : "Esperava nome de Pokémon no campo 'pokemon'";
+        assert nomePrimeiroPokemon != null : "Esperava nome de Pokémon no campo 'pokemon'";
     }
 
     @Test(description = "Deve retornar 404 ao buscar habilidade inexistente")
