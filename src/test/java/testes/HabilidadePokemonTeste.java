@@ -36,7 +36,7 @@ public class HabilidadePokemonTeste extends TesteBase {
         test.info("<pre>" + Conversor.serializar(habilidade) + "</pre>");
 
         Assert.assertEquals(habilidade.getNome(), "overgrow", "Esperava habilidade 'overgrow'");
-        assert habilidade.getPokemonsRelacionados().size() > 0 : "Esperava Pokémon associados à habilidade";
+        Assert.assertEquals(habilidade.getPokemonsRelacionados().size() > 0, true, "Esperava Pokémon associados à habilidade");
 
         String nomePrimeiroPokemon = habilidade.getPokemonsRelacionados().get(0).getPokemon().getNome();
         assert nomePrimeiroPokemon != null : "Esperava nome de Pokémon no campo 'pokemon'";
