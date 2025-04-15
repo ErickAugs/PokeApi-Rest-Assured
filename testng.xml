@@ -1,10 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="PokeAPI Test Suite">
-    <test name="PokeAPI Tests">
-        <classes>
-            <class name="testes.PokemonTest"/>
-            <class name="testes.AbilityTest"/>
-            <class name="testes.TypeTest"/>
-        </classes>
+    <test name="Todos os testes do pacote 'testes'">
+        <packages>
+            <package name="testes"/>
+        </packages>
     </test>
 </suite>
