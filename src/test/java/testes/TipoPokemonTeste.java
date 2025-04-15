@@ -28,6 +28,18 @@ public class TipoPokemonTeste extends TesteBase {
         Assert.assertEquals(tipo.getPokemons().size() > 0, true, "Esperava que houvesse pokémons associados ao tipo.");
     }
 
+    @Test(description = "Verificar que tipo 'fire' possui múltiplos Pokémon associados")
+    public void deveConterMultiplosPokemonsNoTipoFire() {
+        test.info("Buscando tipo 'fire'...");
+
+        TipoPokemon tipo = servico.buscarTipo("fire");
+        test.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
+
+        Assert.assertEquals(tipo.getNome(), "fire", "Esperava o nome 'fire'");
+        assert tipo.getPokemons().size() > 5 : "Esperava mais de 5 Pokémon associados ao tipo 'fire'";
+    }
+
+
     @Test(description = "Deve retornar 404 ao buscar tipo inexistente")
     public void deveRetornarErroParaTipoInexistente() {
         String tipoInvalido = "dark-water-chuchu";
