@@ -68,6 +68,12 @@ Cenário: Consultar Pokémon existente
   Então o nome do Pokémon retornado deve ser "pikachu"
   E o ID deve ser 25
 
+Cenário: Validar estrutura mínima de um Pokémon
+  Dado que o Pokémon "bulbasaur" existe na PokeAPI
+  Quando eu realizo uma requisição GET para o endpoint /pokemon/bulbasaur
+  Então o nome do Pokémon retornado deve ser "bulbasaur"
+  E a altura e peso devem ser maiores que zero  
+
 Cenário: Consultar Pokémon inexistente
   Dado que o Pokémon "pikachuchu" não existe
   Quando eu realizo uma requisição GET para o endpoint /pokemon/pikachuchu
@@ -85,6 +91,12 @@ Cenário: Consultar habilidade existente
   Então o nome da habilidade deve ser "static"
   E deve existir uma lista de efeitos
   E deve existir uma lista de Pokémon relacionados
+   
+Cenário: Validar Pokémon associados à habilidade
+  Dado que a habilidade "overgrow" existe
+  Quando eu realizo uma requisição GET para o endpoint /ability/overgrow
+  Então deve existir pelo menos um Pokémon listado com essa habilidade
+  E o campo "pokemon" deve conter a chave "name"
 
 Cenário: Consultar habilidade inexistente
   Dado que a habilidade "super-salto-triplo" não existe
@@ -102,6 +114,12 @@ Cenário: Consultar tipo existente
   Quando eu realizo uma requisição GET para o endpoint /type/electric
   Então o nome do tipo retornado deve ser "electric"
   E deve existir uma lista de Pokémon associados ao tipo
+
+Cenário: Verificar quantidade de Pokémon associados ao tipo "fire"
+  Dado que o tipo "fire" existe
+  Quando eu realizo uma requisição GET para o endpoint /type/fire
+  Então a resposta deve conter uma lista de Pokémon
+  E essa lista deve conter mais de 5 Pokémon
 
 Cenário: Consultar tipo inexistente
   Dado que o tipo "banana-fire" não existe
