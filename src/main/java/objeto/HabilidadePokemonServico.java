@@ -24,7 +24,7 @@ public class HabilidadePokemonServico {
         return deserializar(resposta, Habilidade.class);
     }
 
-    public Response buscarHabilidadeCru(String nome) {
+    public Response buscarHabilidadeInexistente(String nome) {
         return cliente.getHabilidade(nome);
     }
 }

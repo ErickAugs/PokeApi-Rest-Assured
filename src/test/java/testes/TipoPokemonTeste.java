@@ -1,7 +1,6 @@
 package testes;
 
 import io.restassured.response.Response;
-import modelo.Pokemon;
 import modelo.TipoPokemon;
 import objeto.TipoPokemonServico;
 import org.testng.Assert;
@@ -9,6 +8,7 @@ import org.testng.annotations.Test;
 import runners.TesteBase;
 import utils.Conversor;
 
+import static org.testng.Assert.*;
 import static utils.CodigosHttp.NAO_ENCONTRADO;
 
 
@@ -24,8 +24,8 @@ public class TipoPokemonTeste extends TesteBase {
 
         test.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
 
-        Assert.assertEquals(tipo.getNome(), "electric", "Esperava que o nome do tipo fosse 'electric'.");
-        Assert.assertEquals(tipo.getPokemons().size() > 0, true, "Esperava que houvesse pokémons associados ao tipo.");
+        assertEquals(tipo.getNome(), "electric", "Esperava que o nome do tipo fosse 'electric'.");
+        assertTrue(tipo.getPokemons().size() > 0,  "Esperava que houvesse pokémons associados ao tipo.");
     }
 
     @Test(description = "Verificar que tipo 'fire' possui múltiplos Pokémon associados")
@@ -35,8 +35,8 @@ public class TipoPokemonTeste extends TesteBase {
         TipoPokemon tipo = servico.buscarTipo("fire");
         test.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
 
-        Assert.assertEquals(tipo.getNome(), "fire", "Esperava o nome 'fire'");
-        assert tipo.getPokemons().size() > 5 : "Esperava mais de 5 Pokémon associados ao tipo 'fire'";
+        assertEquals(tipo.getNome(), "fire", "Esperava o nome 'fire'");
+        assertTrue(tipo.getPokemons().size() > 5, "Esperava mais de 5 Pokémon associados ao tipo 'fire'");
     }
 
 
@@ -45,9 +45,9 @@ public class TipoPokemonTeste extends TesteBase {
         String tipoInvalido = "dark-water-chuchu";
         test.info("Buscando tipo inválido: " + tipoInvalido);
 
-        Response resposta = servico.buscarPokemonCru(tipoInvalido);
+        Response resposta = servico.buscarPokemonInexistente(tipoInvalido);
 
         test.info("Status retornado: " + resposta.statusCode());
-        Assert.assertEquals(resposta.statusCode(), NAO_ENCONTRADO, "Esperava status 404 para tipo inexistente.");
+        assertEquals(resposta.statusCode(), NAO_ENCONTRADO, "Esperava status 404 para tipo inexistente.");
     }
 }

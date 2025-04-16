@@ -21,7 +21,7 @@ public class PokemonServico {
         return deserializar(resposta, Pokemon.class);
     }
 
-    public Response buscarPokemonCru(String nome) {
+    public Response buscarPokemonInexistente(String nome) {
         return cliente.getPokemon(nome);
     }
 }

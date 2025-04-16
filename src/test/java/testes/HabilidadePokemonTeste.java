@@ -3,7 +3,6 @@ package testes;
 import io.restassured.response.Response;
 import modelo.Habilidade;
 import objeto.HabilidadePokemonServico;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import runners.TesteBase;
 import utils.Conversor;
@@ -23,9 +22,9 @@ public class HabilidadePokemonTeste extends TesteBase {
 
         test.info("<pre>" + Conversor.serializar(habilidade) + "</pre>");
 
-        Assert.assertEquals(habilidade.getNome(), "static", "Esperava que o nome da habilidade fosse 'static'.");
-        Assert.assertEquals(habilidade.getEfeitos().size() > 0, true, "Esperava que houvesse efeitos listados.");
-        Assert.assertEquals(habilidade.getPokemonsRelacionados().size() > 0, true, "Esperava Pokémon relacionados à habilidade.");
+        assertEquals(habilidade.getNome(), "static", "Esperava que o nome da habilidade fosse 'static'.");
+        assertEquals(habilidade.getEfeitos().size() > 0, true, "Esperava que houvesse efeitos listados.");
+        assertEquals(habilidade.getPokemonsRelacionados().size() > 0, true, "Esperava Pokémon relacionados à habilidade.");
     }
 
     @Test(description = "Validar Pokémon associados à habilidade Overgrow")
@@ -35,8 +34,8 @@ public class HabilidadePokemonTeste extends TesteBase {
         Habilidade habilidade = servico.buscarHabilidade("overgrow");
         test.info("<pre>" + Conversor.serializar(habilidade) + "</pre>");
 
-        Assert.assertEquals(habilidade.getNome(), "overgrow", "Esperava habilidade 'overgrow'");
-        Assert.assertEquals(habilidade.getPokemonsRelacionados().size() > 0, true, "Esperava Pokémon associados à habilidade");
+        assertEquals(habilidade.getNome(), "overgrow", "Esperava habilidade 'overgrow'");
+        assertEquals(habilidade.getPokemonsRelacionados().size() > 0, true, "Esperava Pokémon associados à habilidade");
 
         String nomePrimeiroPokemon = habilidade.getPokemonsRelacionados().get(0).getPokemon().getNome();
         assert nomePrimeiroPokemon != null : "Esperava nome de Pokémon no campo 'pokemon'";
@@ -47,9 +46,9 @@ public class HabilidadePokemonTeste extends TesteBase {
         String habilidadeInvalida = "super-salto-triplo";
         test.info("Buscando habilidade inválida: " + habilidadeInvalida);
 
-        Response resposta = servico.buscarHabilidadeCru(habilidadeInvalida);
+        Response resposta = servico.buscarHabilidadeInexistente(habilidadeInvalida);
 
         test.info("Status retornado: " + resposta.statusCode());
-        Assert.assertEquals(resposta.statusCode(), NAO_ENCONTRADO, "Esperava status 404 para habilidade inexistente.");
+        assertEquals(resposta.statusCode(), NAO_ENCONTRADO, "Esperava status 404 para habilidade inexistente.");
     }
 }
