@@ -171,4 +171,4 @@ Este projeto utiliza **GitHub Actions** para executar os testes automaticamente 
 
 ## ✨ Autor
 
-Feito com 💙 por [ErickAugs](https://github.com/ErickAugs) para o desafio técnico de automação de testes de API.
+Github: [ErickAugs](https://github.com/ErickAugs)
