@@ -10,32 +10,32 @@ import java.lang.reflect.Method;
 
 public class TesteBase {
 
-    protected static ExtentReports extent;
-    protected static ExtentTest test;
+    protected static ExtentReports relatorio;
+    protected static ExtentTest teste;
 
     @BeforeSuite
-    public void setupSuite() {
-        extent = ExtentManager.getInstance();
+    public void configurarSuite() {
+        relatorio = ExtentManager.getInstance();
     }
 
     @BeforeMethod
-    public void setupTest(Method method) {
-        test = extent.createTest(method.getName());
+    public void configurarTeste(Method metodo) {
+        teste = relatorio.createTest(metodo.getName());
     }
 
     @AfterMethod
-    public void tearDownTest(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            test.fail(result.getThrowable());
-        } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.pass("Test passed");
-        } else if (result.getStatus() == ITestResult.SKIP) {
-            test.skip("Test skipped");
+    public void finalizarTeste(ITestResult resultado) {
+        if (resultado.getStatus() == ITestResult.FAILURE) {
+            teste.fail(resultado.getThrowable());
+        } else if (resultado.getStatus() == ITestResult.SUCCESS) {
+            teste.pass("Teste passou com sucesso");
+        } else if (resultado.getStatus() == ITestResult.SKIP) {
+            teste.skip("Teste ignorado");
         }
     }
 
     @AfterSuite
-    public void tearDownSuite() {
-        extent.flush();
+    public void finalizarSuite() {
+        relatorio.flush();
     }
 }

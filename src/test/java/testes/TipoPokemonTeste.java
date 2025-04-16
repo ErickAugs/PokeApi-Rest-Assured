@@ -18,11 +18,11 @@ public class TipoPokemonTeste extends TesteBase {
 
     @Test(description = "Deve retornar o tipo Eletric com sucesso")
     public void retornarTipoEletricComSucesso() {
-        test.info("Iniciando o teste de tipagem Eeltrica do pokemon");
+        teste.info("Iniciando o teste de tipagem Eeltrica do pokemon");
 
         TipoPokemon tipo = servico.buscarTipo("electric");
 
-        test.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
+        teste.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
 
         assertEquals(tipo.getNome(), "electric", "Esperava que o nome do tipo fosse 'electric'.");
         assertTrue(tipo.getPokemons().size() > 0,  "Esperava que houvesse pokémons associados ao tipo.");
@@ -30,10 +30,10 @@ public class TipoPokemonTeste extends TesteBase {
 
     @Test(description = "Verificar que tipo 'fire' possui múltiplos Pokémon associados")
     public void deveConterMultiplosPokemonsNoTipoFire() {
-        test.info("Buscando tipo 'fire'...");
+        teste.info("Buscando tipo 'fire'...");
 
         TipoPokemon tipo = servico.buscarTipo("fire");
-        test.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
+        teste.info("<pre>" + Conversor.serializar(tipo) + "</pre>");
 
         assertEquals(tipo.getNome(), "fire", "Esperava o nome 'fire'");
         assertTrue(tipo.getPokemons().size() > 5, "Esperava mais de 5 Pokémon associados ao tipo 'fire'");
@@ -43,11 +43,11 @@ public class TipoPokemonTeste extends TesteBase {
     @Test(description = "Deve retornar 404 ao buscar tipo inexistente")
     public void deveRetornarErroParaTipoInexistente() {
         String tipoInvalido = "dark-water-chuchu";
-        test.info("Buscando tipo inválido: " + tipoInvalido);
+        teste.info("Buscando tipo inválido: " + tipoInvalido);
 
         Response resposta = servico.buscarPokemonInexistente(tipoInvalido);
 
-        test.info("Status retornado: " + resposta.statusCode());
+        teste.info("Status retornado: " + resposta.statusCode());
         assertEquals(resposta.statusCode(), NAO_ENCONTRADO, "Esperava status 404 para tipo inexistente.");
     }
 }
