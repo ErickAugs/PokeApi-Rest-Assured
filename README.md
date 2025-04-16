@@ -63,21 +63,21 @@ src
 
 ```gherkin
 Cenário: Consultar Pokémon existente
-  Dado que o Pokémon "pikachu" existe na PokeAPI
-  Quando eu realizo uma requisição GET para o endpoint /pokemon/pikachu
-  Então o nome do Pokémon retornado deve ser "pikachu"
-  E o ID deve ser 25
+Dado que o Pokémon "pikachu" existe na PokeAPI
+Quando eu realizo uma requisição GET para o endpoint /pokemon/pikachu
+Então o nome do Pokémon retornado deve ser "pikachu"
+E o ID deve ser 25
 
 Cenário: Validar estrutura mínima de um Pokémon
-  Dado que o Pokémon "bulbasaur" existe na PokeAPI
-  Quando eu realizo uma requisição GET para o endpoint /pokemon/bulbasaur
-  Então o nome do Pokémon retornado deve ser "bulbasaur"
-  E a altura e peso devem ser maiores que zero  
+Dado que o Pokémon "bulbasaur" existe na PokeAPI
+Quando eu realizo uma requisição GET para o endpoint /pokemon/bulbasaur
+Então o nome do Pokémon retornado deve ser "bulbasaur"
+E a altura e peso devem ser maiores que zero
 
 Cenário: Consultar Pokémon inexistente
-  Dado que o Pokémon "pikachuchu" não existe
-  Quando eu realizo uma requisição GET para o endpoint /pokemon/pikachuchu
-  Então o status de resposta deve ser 404
+Dado que o Pokémon "pikachuchu" não existe
+Quando eu realizo uma requisição GET para o endpoint /pokemon/pikachuchu
+Então o status de resposta deve ser 404
 ```
 
 ---
@@ -86,22 +86,22 @@ Cenário: Consultar Pokémon inexistente
 
 ```gherkin
 Cenário: Consultar habilidade existente
-  Dado que a habilidade "static" existe
-  Quando eu realizo uma requisição GET para o endpoint /ability/static
-  Então o nome da habilidade deve ser "static"
-  E deve existir uma lista de efeitos
-  E deve existir uma lista de Pokémon relacionados
-   
+Dado que a habilidade "static" existe
+Quando eu realizo uma requisição GET para o endpoint /ability/static
+Então o nome da habilidade deve ser "static"
+E deve existir uma lista de efeitos
+E deve existir uma lista de Pokémon relacionados
+
 Cenário: Validar Pokémon associados à habilidade
-  Dado que a habilidade "overgrow" existe
-  Quando eu realizo uma requisição GET para o endpoint /ability/overgrow
-  Então deve existir pelo menos um Pokémon listado com essa habilidade
-  E o campo "pokemon" deve conter a chave "name"
+Dado que a habilidade "overgrow" existe
+Quando eu realizo uma requisição GET para o endpoint /ability/overgrow
+Então deve existir pelo menos um Pokémon listado com essa habilidade
+E o campo "pokemon" deve conter a chave "name"
 
 Cenário: Consultar habilidade inexistente
-  Dado que a habilidade "super-salto-triplo" não existe
-  Quando eu realizo uma requisição GET para o endpoint /ability/super-salto-triplo
-  Então o status de resposta deve ser 404
+Dado que a habilidade "super-salto-triplo" não existe
+Quando eu realizo uma requisição GET para o endpoint /ability/super-salto-triplo
+Então o status de resposta deve ser 404
 ```
 
 ---
@@ -110,22 +110,53 @@ Cenário: Consultar habilidade inexistente
 
 ```gherkin
 Cenário: Consultar tipo existente
-  Dado que o tipo "electric" existe
-  Quando eu realizo uma requisição GET para o endpoint /type/electric
-  Então o nome do tipo retornado deve ser "electric"
-  E deve existir uma lista de Pokémon associados ao tipo
+Dado que o tipo "electric" existe
+Quando eu realizo uma requisição GET para o endpoint /type/electric
+Então o nome do tipo retornado deve ser "electric"
+E deve existir uma lista de Pokémon associados ao tipo
 
 Cenário: Verificar quantidade de Pokémon associados ao tipo "fire"
-  Dado que o tipo "fire" existe
-  Quando eu realizo uma requisição GET para o endpoint /type/fire
-  Então a resposta deve conter uma lista de Pokémon
-  E essa lista deve conter mais de 5 Pokémon
+Dado que o tipo "fire" existe
+Quando eu realizo uma requisição GET para o endpoint /type/fire
+Então a resposta deve conter uma lista de Pokémon
+E essa lista deve conter mais de 5 Pokémon
 
 Cenário: Consultar tipo inexistente
-  Dado que o tipo "banana-fire" não existe
-  Quando eu realizo uma requisição GET para o endpoint /type/banana-fire
-  Então o status de resposta deve ser 404
+Dado que o tipo "banana-fire" não existe
+Quando eu realizo uma requisição GET para o endpoint /type/banana-fire
+Então o status de resposta deve ser 404
 ```
+
+---
+
+## 🔁 Integração Contínua com GitHub Actions
+
+Este projeto utiliza **GitHub Actions** para executar os testes automaticamente a cada push ou pull request na branch `main`.
+
+### 📦 O que está configurado:
+
+- Instalação do Java 17
+- Execução dos testes com Maven (`mvn clean test`)
+- Geração do relatório `ExtentReport`
+- Armazenamento do relatório como artefato para download
+
+### 🧪 Pipeline configurada em:
+```bash
+.github/workflows/api-tests.yml
+```
+
+### ✅ Resultado visível com badge:
+
+![Testes Automatizados da PokeAPI](https://github.com/ErickAugs/PokeApi-Rest-Assured/actions/workflows/api-tests.yml/badge.svg)
+
+### 📄 Como acessar o relatório:
+
+1. Vá até a aba **Actions** do repositório no GitHub
+2. Clique no workflow executado
+3. Baixe o artefato chamado **extent-report**
+4. Abra o arquivo `extent-report.html` no navegador
+
+> Isso permite monitorar a saúde dos testes diretamente pelo GitHub, ideal para times e CI/CD.
 
 ---
 
